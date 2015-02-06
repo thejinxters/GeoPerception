@@ -4,10 +4,10 @@
 **Team Name:** GeoPerception
 
 **Team Members:**
-    Brandon Mikulka
-    Michael Asnes
-    John-Luke Bucuvalas
-    Cassiane Cladis
+    Brandon Mikulka,
+    Michael Asnes,
+    John-Luke Bucuvalas,
+    Cassiane Cladis, and
     Jacob Morales
 
 **Project:** Analyze Geodata from Twitter (or other similar geotagged sources) to map trends in hashtags or related keywords throughout a history.
