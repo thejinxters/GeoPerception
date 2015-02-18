@@ -24,10 +24,10 @@
 ## Installation
 
 ### 1. virtualenv / virtualenv wrapper
-`virtualenv` is a python environment manager that allows you to create an isolated python environment inside a folder. This feature combined with `virutalenvwrapper` allows you to create the same virutal environment, but store it in a .virtualenvs folder in your home directory, rather than scattered throughout your computer in different folders.
+`virtualenv` is a python environment manager that allows you to create an isolated python environment inside a folder. This feature combined with `virtualenvwrapper` allows you to create the same virtual environment, but store it in a .virtualenvs folder in your home directory, rather than scattered throughout your computer in different folders.
 
 ```bash
-pip install virutalenv virtualenvwrapper
+pip install virtualenv virtualenvwrapper
 ```
 
 Once installed, use the command `mkvirtualenv geoperception` to create an isolated environment called 'geoperception.'
