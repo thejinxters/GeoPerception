@@ -24,8 +24,17 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+# Absolute paths for where the project and templates are stored.
+SETTINGS_PATH = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTINGS_PATH, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+TEMPLATES_PATH = os.path.join(PROJECT_PATH, "templates")
+TEMPLATE_DIRS = (
+    # ABSOLUTE_TEMPLATES_PATH,
+    TEMPLATES_PATH,
+)
 
+ALLOWED_HOSTS = []
 
 # Application definition
 
