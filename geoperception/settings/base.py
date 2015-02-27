@@ -1,3 +1,4 @@
+import ipdb
 """
 Django settings for geoperception project.
 
@@ -9,8 +10,10 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+SETTINGS_PATH = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.dirname(SETTINGS_PATH))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,28 +28,31 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 # Absolute paths for where the project and templates are stored.
-SETTINGS_PATH = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(SETTINGS_PATH, os.pardir)
-PROJECT_PATH = os.path.abspath(PROJECT_PATH)
-TEMPLATES_PATH = os.path.join(PROJECT_PATH, "templates")
+TEMPLATES_PATH = os.path.join(BASE_DIR, "templates")
 TEMPLATE_DIRS = (
     # ABSOLUTE_TEMPLATES_PATH,
     TEMPLATES_PATH,
 )
 
-ALLOWED_HOSTS = []
+# Allow Localhost for production setting testing
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
-INSTALLED_APPS = (
+PROJECT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+DEVELOPMENT_APPS = [
     'debug_toolbar',
-)
+]
+
+INSTALLED_APPS = PROJECT_APPS + DEVELOPMENT_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

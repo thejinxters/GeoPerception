@@ -64,3 +64,9 @@ Lets get the thing up and running
 ./manage.py runserver
 ```
 
+#### Testing Production
+If you want to run the server without debug mode:
+
+```bash
+./manage.py runserver --settings=geoperception.settings.production
+```
