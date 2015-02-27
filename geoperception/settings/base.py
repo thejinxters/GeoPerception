@@ -1,4 +1,3 @@
-import ipdb
 """
 Django settings for geoperception project.
 
@@ -12,6 +11,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 import os
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
 SETTINGS_PATH = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(SETTINGS_PATH))
 
@@ -33,6 +34,10 @@ TEMPLATE_DIRS = (
     # ABSOLUTE_TEMPLATES_PATH,
     TEMPLATES_PATH,
 )
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+    )
+
 
 # Allow Localhost for production setting testing
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
