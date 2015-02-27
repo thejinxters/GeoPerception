@@ -1,67 +1,68 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block content %}
   <div class="starter-template">
     <h1> Hello GeoPerception Enthusiast </h1>
     <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
   </div>
-    <script type="text/javascript">
-      // If you're adding a number of markers, you may want to drop them on the map
-// consecutively rather than all at once. This example shows how to use
-// window.setTimeout() to space your markers' animation.
 
-var berlin = new google.maps.LatLng(52.520816, 13.410186);
+  <script type="text/javascript">
+    var usa = new google.maps.LatLng(38.8833, 265.9833);
 
-var neighborhoods = [
-  new google.maps.LatLng(52.520816, 13.410186),
-  new google.maps.LatLng(52.549061, 13.422975),
-  new google.maps.LatLng(52.497622, 13.396110),
-  new google.maps.LatLng(52.517683, 13.394393)
-];
+    var markers = [];
+    var map;
+    var image = "{% static 'images/tweet-30.png' %}";
 
-var markers = [];
-var map;
+    // Initialize Map
+    function initialize() {
+      var mapOptions = {
+        zoom: 4,
+        center: usa
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+              mapOptions);
+    }
 
-function initialize() {
-  var mapOptions = {
-    zoom: 12,
-    center: berlin
-  };
+    // When Drop is clicked, set up large amount of inserts
+    function drop() {
+      for (var i = 0; i < 1000; i++) {
+        insertMarker(i);
+      }
+    }
 
-  map = new google.maps.Map(document.getElementById('map-canvas'),
-          mapOptions);
-}
+    // Abstract setTimeout into its own function
+    function insertMarker(i){
+      window.setTimeout(function() {
+          addMarker();
+        }, 100000 * Math.random());
+    }
 
-function drop() {
-  for (var i = 0; i < neighborhoods.length; i++) {
-    window.setTimeout(function() {
-      console.log('placing');
-      addMarker(neighborhoods[i]);
-    }, i * 200);
-  }
-  iterator = 0;
-}
+    // Adds marker to the marker list
+    function addMarker() {
+      markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng((Math.random() - 0.5) * 180, (Math.random() - 0.5) * 360),
+        map: map,
+        icon: image,
+        title: 'tweet'
+      }));
+    }
 
-function addMarker(position) {
-  markers.push(new google.maps.Marker({
-    position: position,
-    map: map,
-    title: 'tweet'
-  }));
-}
+    // When clear is clicked, remove all markers
+    function clearMarkers() {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+      markers = [];
+    }
 
-function clearMarkers() {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
-  }
-  markers = [];
-}
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
 
-google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-    <div id="panel" style="margin-left: -52px">
-      <button id="drop" onclick="drop()">Drop Markers</button>
-    </div>
-    <div id="map-canvas"></div>
+  <div id="panel" style="margin-left: -52px">
+    <button id="drop" onclick="drop()">Drop Markers</button>
+    <button id="drop" onclick="clearMarkers()">Clear Markers</button>
+  </div>
+  <div id="map-canvas"></div>
 
 {% endblock %}
