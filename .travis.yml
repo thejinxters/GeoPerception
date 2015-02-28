@@ -3,5 +3,6 @@ python:
   - "3.4"
 install:
   - pip install Django==1.7.4
+  - pip install django-debug-toolbar==1.2.2
 script:
   - python manage.py test
