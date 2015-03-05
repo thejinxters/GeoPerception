@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/CUBigDataClass/GeoPerceptionApp.svg?branch=test-integration)](https://travis-ci.org/CUBigDataClass/GeoPerceptionApp)
 # GeoPerception
 
 ## Project Description
