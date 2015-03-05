@@ -4,4 +4,10 @@ body {
 
 h2 {
 	font-family: 'Crafty Girls', cursive;
+	font-size: 25pt; 
+}
+
+p {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14pt;
 }
