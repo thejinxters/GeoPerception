@@ -10,6 +10,8 @@ class GenericView(TemplateView):
         }
         return self.render_to_response(context)
 
+class HeatmapView(GenericView):
+    template_name = 'heatmap.html'
 
 class HomeView(GenericView):
     template_name = 'home.html'
