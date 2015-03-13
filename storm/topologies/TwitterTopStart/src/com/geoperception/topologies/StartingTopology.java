@@ -1,4 +1,4 @@
-package com.geoperception.startingtop;
+package com.geoperception.topologies;
 
 import java.util.Arrays;
 
@@ -6,6 +6,10 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.utils.Utils;
+import com.geoperception.bolts.LocationCounter;
+import com.geoperception.bolts.LocationFetch;
+import com.geoperception.bolts.PrinterBolt;
+import com.geoperception.spouts.BasicTwitterSpout;
 
 public class StartingTopology {
 	

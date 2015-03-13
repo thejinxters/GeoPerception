@@ -1,4 +1,4 @@
-package com.geoperception.startingtop;
+package com.geoperception.bolts;
 
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
