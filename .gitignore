@@ -7,18 +7,18 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
+/env/
+/build/
+/develop-eggs/
+/dist/
+/downloads/
+/eggs/
+/.eggs/
+/lib/
+/lib64/
+/parts/
+/sdist/
+/var/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -40,3 +40,19 @@ coverage.xml
 
 # Development Environment
 *.sqlite3
+
+# Java
+*.class
+
+# Eclipse
+.metadata
+.settings
+.project
+.classpath
+.recomenders
+
+
+# Intellij
+.idea/
+*.iml
+out/
