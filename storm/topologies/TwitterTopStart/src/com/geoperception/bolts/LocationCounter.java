@@ -27,7 +27,7 @@ public class LocationCounter extends BaseBasicBolt{
 			count = 0;
 		count++;
 		counts.put(place,count);
-		collector.emit(new Values(place, count));
+		collector.emit(new Values(count, place));
 		
 	}
 

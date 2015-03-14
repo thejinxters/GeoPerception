@@ -22,10 +22,25 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.datastax.cassandra</groupId>
+      <artifactId>cassandra-driver-core</artifactId>
+      <version>2.1.4</version>
+    </dependency>
+
   </dependencies>
 
   <build>
     <sourceDirectory>src</sourceDirectory>
+
+    <resources>
+
+      <resource>
+          <directory>src/resources</directory>
+      </resource>
+
+    </resources>
+
     <plugins>
 
       <plugin>
