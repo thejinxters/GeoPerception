@@ -1,6 +1,11 @@
 #Storm-Setup
 **Instructions for running counter **
 
+##Setup Cassandra (required)
+Install Cassndra on a mac with homebrew, `brew install cassandra`
+and `pip install cassandra-driver cql`
+
+
 ##Run using Maven
 
 ###From the command line
