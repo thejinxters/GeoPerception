@@ -1,4 +1,4 @@
-package com.geoperception.startingtop;
+package com.geoperception.bolts;
 
 import twitter4j.HashtagEntity;
 import twitter4j.Place;
@@ -10,6 +10,7 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
+@SuppressWarnings("serial")
 public class HashtagFetch extends BaseBasicBolt{
 
 	@Override
