@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="starter-template">
+    <h1>Heatmap Example</h1>
+</div>
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/heatmap.js"></script>
+
+  <div id="panel" style="margin-left: -52px">
+      <button id="drop" onclick="addRandomValues()">Add 10000 Random Values</button>
+  </div>
+  <div id="map-canvas"></div>
+
+  {% endblock %}
