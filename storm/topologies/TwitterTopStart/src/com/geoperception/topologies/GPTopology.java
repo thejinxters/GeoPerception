@@ -37,7 +37,7 @@ public class GPTopology {
 		builder.setBolt("loc", new LocationFetch()).shuffleGrouping("tweetspout");
 		builder.setBolt("count", new LocationCounter()).shuffleGrouping("loc");
 		builder.setBolt("print", new PrinterBolt()).shuffleGrouping("count");
-        builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
+//        builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
 		
 		//***************************Start Stream***************************
 		Config conf = new Config();

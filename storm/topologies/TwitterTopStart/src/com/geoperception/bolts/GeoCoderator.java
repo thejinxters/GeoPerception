@@ -33,8 +33,6 @@ public class GeoCoderator extends BaseBasicBolt{
             e.printStackTrace();
         }
 
-        System.out.println(results[0].geometry.location);
-
         double lat = results[0].geometry.location.lat;
         double lng = results[0].geometry.location.lng;
 
