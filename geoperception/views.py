@@ -11,14 +11,6 @@ class GenericView(TemplateView):
         context['locations'] = Locations.objects.all()
         return context
 
-    # def get(self, request, *args, **kwargs):
-
-    #     context = {
-    #         'variable_from_homeview': 'This comes from Geoperception/views.py'
-    #     }
-    #     # context = Locations.objects.all()
-    #     return self.render_to_response(context)
-
 class HeatmapView(GenericView):
     template_name = 'heatmap.html'
 

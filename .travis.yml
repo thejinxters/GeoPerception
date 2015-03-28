@@ -4,5 +4,7 @@ python:
 install:
   - pip install Django==1.7.4
   - pip install django-debug-toolbar==1.2.2
+  - pip install git+https://github.com/TargetHolding/djangotoolbox.git@master
+  - pip install git+https://github.com/TargetHolding/django-cassandra-engine.git@master
 script:
   - python manage.py test

@@ -1,11 +1,12 @@
+blist==1.3.6
 cassandra-driver==2.1.4
 cql==1.4.0
 cqlengine==0.21.0
 Django==1.7.4
+-e git+https://github.com/TargetHolding/django-cassandra-engine.git@a22a13bcefded0e268377c12d63e19129a885806#egg=django_cassandra_engine-master
 django-debug-toolbar==1.2.2
 django-extensions==1.5.0
--e git+https://github.com/TargetHolding/djangotoolbox.git@master#egg=djangotoolbox
--e git+https://github.com/TargetHolding/django-cassandra-engine.git@master#egg=django-cassandra-engine
+-e git+https://github.com/TargetHolding/djangotoolbox.git@6590de12dfa8c27b620c43cd94ba97cd85513ef7#egg=djangotoolbox-master
 ecdsa==0.13
 Fabric==1.10.1
 futures==2.2.0
