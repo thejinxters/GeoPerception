@@ -6,12 +6,13 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.utils.Utils;
+import com.geoperception.bolts.GeoCoderator;
 import com.geoperception.bolts.LocationCounter;
 import com.geoperception.bolts.LocationFetch;
 import com.geoperception.bolts.PrinterBolt;
 import com.geoperception.spouts.BasicTwitterSpout;
 
-public class StartingTopology {
+public class GPTopology {
 	
 	public static void main(String[] args){
 		
@@ -19,9 +20,10 @@ public class StartingTopology {
 		String consumerSecret = args[1];
 		String accessToken = args[2];
 		String accessTokenSecret = args[3];
+        String GoogleAuth = args[4];
 		
 		String[] arguments = args.clone();
-        String[] keyWords = Arrays.copyOfRange(arguments, 4, arguments.length);
+        String[] keyWords = Arrays.copyOfRange(arguments, 5, arguments.length);
 		
 		
 		TopologyBuilder builder = new TopologyBuilder();
@@ -35,6 +37,7 @@ public class StartingTopology {
 		builder.setBolt("loc", new LocationFetch()).shuffleGrouping("tweetspout");
 		builder.setBolt("count", new LocationCounter()).shuffleGrouping("loc");
 		builder.setBolt("print", new PrinterBolt()).shuffleGrouping("count");
+        builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
 		
 		//***************************Start Stream***************************
 		Config conf = new Config();
