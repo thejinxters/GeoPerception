@@ -64,5 +64,10 @@
     <button id="drop" onclick="clearMarkers()">Clear Markers</button>
   </div>
   <div id="map-canvas"></div>
+  <ul>
+  {% for location in locations %}
+    <li>{{ location.name }}</li>
+  {% endfor %}
+  </ul>
 
 {% endblock %}
