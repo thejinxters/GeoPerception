@@ -6,10 +6,7 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.utils.Utils;
-import com.geoperception.bolts.GeoCoderator;
-import com.geoperception.bolts.LocationCounter;
-import com.geoperception.bolts.LocationFetch;
-import com.geoperception.bolts.PrinterBolt;
+import com.geoperception.bolts.*;
 import com.geoperception.spouts.BasicTwitterSpout;
 
 public class GPTopology {
@@ -36,8 +33,10 @@ public class GPTopology {
 		
 		builder.setBolt("loc", new LocationFetch()).shuffleGrouping("tweetspout");
 		builder.setBolt("count", new LocationCounter()).shuffleGrouping("loc");
-		builder.setBolt("print", new PrinterBolt()).shuffleGrouping("count");
-//        builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
+        builder.setBolt("hash",new HashtagFetch()).shuffleGrouping("tweetspout");
+        builder.setBolt("mchash",new MCHash()).shuffleGrouping("hash");
+//		builder.setBolt("print", new PrinterBolt()).shuffleGrouping("count");
+//      builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
 		
 		//***************************Start Stream***************************
 		Config conf = new Config();

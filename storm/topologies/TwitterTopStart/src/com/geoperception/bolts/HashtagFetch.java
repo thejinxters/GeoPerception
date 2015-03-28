@@ -18,8 +18,10 @@ public class HashtagFetch extends BaseBasicBolt{
 		Status status = (Status) tuple.getValueByField("tweet");
 		HashtagEntity[] hashtags = status.getHashtagEntities();
 		Place place = status.getPlace();
-		String country = place.getCountry();
-		collector.emit(new Values(country,hashtags));
+        if (place != null && hashtags != null) {
+            String country = place.getCountry();
+            collector.emit(new Values(country, hashtags));
+        }
 	}
 
 	@Override
