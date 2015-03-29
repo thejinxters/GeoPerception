@@ -27,11 +27,25 @@
 ### 1. virtualenv / virtualenv wrapper
 `virtualenv` is a python environment manager that allows you to create an isolated python environment inside a folder. This feature combined with `virtualenvwrapper` allows you to create the same virtual environment, but store it in a .virtualenvs folder in your home directory, rather than scattered throughout your computer in different folders.
 
+You will need to install python3
+
+```bash
+brew install python3 # on a mac
+apt-get install python3 # on ubuntu/debian
+```
+
+
 ```bash
 pip install virtualenv virtualenvwrapper
 ```
 
-Once installed, use the command `mkvirtualenv geoperception` to create an isolated environment called 'geoperception.'
+Once installed, use the command:
+
+```
+mkvirtualenv -p $(which python3) geoperception
+```
+
+This creates an isolated environment called 'geoperception' that is running python 3.
 
 Use the following commmand to start working within that environment:
 
@@ -57,7 +71,11 @@ The requirements.txt file will allow you to install django and this App's depend
 pip install -r requirements.txt
 ```
 
-### 4. Ready to rock and roll
+### 4. Get Cassandra running
+There is a doc page dedicated to getting cassandra working with this application
+[Cassandra Readme](docs/cassandra_readme.md)
+
+### 5. Ready to rock and roll
 Lets get the thing up and running
 
 ```bash

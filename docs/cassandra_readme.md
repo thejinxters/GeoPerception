@@ -18,7 +18,7 @@ These two files will be found in:
 #### postactivate
 
 ```bash
-export PYTHONPATH_OLD = "$PYTHONPATH"
+export PYTHONPATH_OLD=`$PYTHONPATH`
 export PYTHONPATH="/Users/<YOUR_USERNAME_GOES_HERE>/.virutalenvs/geoperception/lib/python3.4/site-packages"
 ```
 
@@ -28,7 +28,9 @@ This will set your current python path to a variable for retrieval when you deac
 #### predeactivate
 
 ```bash
-export PYTHONPATH = "$PYTHONPATH_OLD"
+export PYTHONPATH=`$PYTHONPATH_OLD`
 ```
 
 This will undo your temporary python path in case you had something in there before activating.
+
+If you have done everything correctly, you should be able to open your virtual environment for python and run `cqlsh` to connect to cassandra
