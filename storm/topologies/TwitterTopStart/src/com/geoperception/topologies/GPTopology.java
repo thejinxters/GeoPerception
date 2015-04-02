@@ -34,11 +34,11 @@ public class GPTopology {
 		
 		builder.setBolt("loc", new LocationFetch()).shuffleGrouping("tweetspout");
 //		builder.setBolt("count", new LocationCounter()).fieldsGrouping("loc", new Fields("place"));
-        builder.setBolt("hash",new HashtagFetch()).shuffleGrouping("tweetspout");
-        builder.setBolt("mchash",new MCHash()).fieldsGrouping("hash", new Fields("country"));
+//        builder.setBolt("hash",new HashtagFetch()).shuffleGrouping("tweetspout");
+//        builder.setBolt("mchash",new MCHash()).fieldsGrouping("hash", new Fields("country"));
 //		builder.setBolt("print", new PrinterBolt()).shuffleGrouping("count");
-        builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
-        builder.setBolt("output", new TextFiler()).shuffleGrouping("geocode");
+//        builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
+//        builder.setBolt("output", new TextFiler()).shuffleGrouping("geocode");
 		
 		//***************************Start Stream***************************
 		Config conf = new Config();
