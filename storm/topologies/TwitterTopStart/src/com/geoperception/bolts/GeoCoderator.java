@@ -36,6 +36,8 @@ public class GeoCoderator extends BaseBasicBolt{
         double lat = results[0].geometry.location.lat;
         double lng = results[0].geometry.location.lng;
 
+//        System.out.println(lat + " " + " " + lng);
+
         collector.emit(new Values(lat,lng));
     }
 	
@@ -43,7 +45,7 @@ public class GeoCoderator extends BaseBasicBolt{
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("latitude", "longitude"));
+		declarer.declare(new Fields("lat", "lng"));
 		
 	}
 
