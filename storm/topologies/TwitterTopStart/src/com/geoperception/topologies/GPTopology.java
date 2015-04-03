@@ -5,13 +5,12 @@ import java.util.Arrays;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
+import backtype.storm.tuple.Fields;
 import backtype.storm.utils.Utils;
-import com.geoperception.bolts.LocationCounter;
-import com.geoperception.bolts.LocationFetch;
-import com.geoperception.bolts.PrinterBolt;
+import com.geoperception.bolts.*;
 import com.geoperception.spouts.BasicTwitterSpout;
 
-public class StartingTopology {
+public class GPTopology {
 	
 	public static void main(String[] args){
 		
@@ -19,9 +18,10 @@ public class StartingTopology {
 		String consumerSecret = args[1];
 		String accessToken = args[2];
 		String accessTokenSecret = args[3];
+        String GoogleAuth = args[4];
 		
 		String[] arguments = args.clone();
-        String[] keyWords = Arrays.copyOfRange(arguments, 4, arguments.length);
+        String[] keyWords = Arrays.copyOfRange(arguments, 5, arguments.length);
 		
 		
 		TopologyBuilder builder = new TopologyBuilder();
@@ -33,8 +33,12 @@ public class StartingTopology {
 		//***************************Bolts***************************
 		
 		builder.setBolt("loc", new LocationFetch()).shuffleGrouping("tweetspout");
-		builder.setBolt("count", new LocationCounter()).shuffleGrouping("loc");
-		builder.setBolt("print", new PrinterBolt()).shuffleGrouping("count");
+//		builder.setBolt("count", new LocationCounter()).fieldsGrouping("loc", new Fields("place"));
+//        builder.setBolt("hash",new HashtagFetch()).shuffleGrouping("tweetspout");
+//        builder.setBolt("mchash",new MCHash()).fieldsGrouping("hash", new Fields("country"));
+//		builder.setBolt("print", new PrinterBolt()).shuffleGrouping("count");
+//        builder.setBolt("geocode", new GeoCoderator(GoogleAuth)).shuffleGrouping("loc");
+//        builder.setBolt("output", new TextFiler()).shuffleGrouping("geocode");
 		
 		//***************************Start Stream***************************
 		Config conf = new Config();

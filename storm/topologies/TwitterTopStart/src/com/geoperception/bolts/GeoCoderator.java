@@ -3,34 +3,49 @@ package com.geoperception.bolts;
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
+import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.model.GeocodingResult;
 
 @SuppressWarnings("serial")
 public class GeoCoderator extends BaseBasicBolt{
 	
-	String Okey;
+	String authKey;
 	
-	public GeoCoderator(String Okey){
-		this.Okey = Okey;
+	public GeoCoderator(String authKey){
+		this.authKey = authKey;
 	}
-	
-	public void makeRequest(String req){
-		
-	}
+
 
 	@Override
 	public void execute(Tuple tuple, BasicOutputCollector collector) {
 		String place = (String) tuple.getValueByField("place");
-		String req = "https://maps.googleapis.com/maps/api/geocode/json?address="
-				+ place + "&key=" + Okey;
-		makeRequest(req);
-	}
+
+        GeoApiContext context = new GeoApiContext().setApiKey(this.authKey);
+        GeocodingResult[] results;
+        try {
+            results = GeocodingApi.geocode(context, place).await();
+        } catch (Exception e) {
+            results = new GeocodingResult[0];
+            e.printStackTrace();
+        }
+
+        double lat = results[0].geometry.location.lat;
+        double lng = results[0].geometry.location.lng;
+
+//        System.out.println(lat + " " + " " + lng);
+
+        collector.emit(new Values(lat,lng));
+    }
 	
 	
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		// TODO Auto-generated method stub
+		declarer.declare(new Fields("lat", "lng"));
 		
 	}
 
