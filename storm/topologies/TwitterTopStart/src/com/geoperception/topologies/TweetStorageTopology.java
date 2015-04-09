@@ -53,6 +53,7 @@ public class TweetStorageTopology {
 
         builder.setBolt("limiter", new GeotagLimiterBolt()).shuffleGrouping("tweetspout");
         builder.setBolt("parser", new ParseTweetDataBolt()).shuffleGrouping("limiter");
+        builder.setBolt("saveTweet", new CassandraWriteBolt()).shuffleGrouping("parser");
 
         
         //***************************Start Stream***************************

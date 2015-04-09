@@ -46,10 +46,22 @@ public class CassandraWriteBolt extends BaseRichBolt {
 
     @Override
     public void execute(Tuple input) {
+
+        Object id = input.getValueByField("id");
+        Object content = input.getValueByField("content");
+        Object userName = input.getValueByField("userName");
+        Object createdAt = input.getValueByField("createdAt");
+        Object lat = input.getValueByField("lat");
+        Object lng = input.getValueByField("lng");
+        Object city = input.getValueByField("city");
+        Object hashtags = input.getValueByField("hashTagText");
+        Object[] tweetArray = new Object[] {content, userName, createdAt, lat, lng, city, hashtags, id};
+
         try{
-            BoundStatement bound = statement.bind(input.getValues().toArray());
+            BoundStatement bound = statement.bind(tweetArray);
             session.execute(bound);
             outputCollector.ack(input);
+            System.out.println("Writing to cassandra");
         }
         catch (Throwable t) {
             outputCollector.reportError(t);

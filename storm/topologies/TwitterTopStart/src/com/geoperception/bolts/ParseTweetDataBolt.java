@@ -9,7 +9,9 @@ import backtype.storm.tuple.Values;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by johnluke on 4/9/15.
@@ -27,9 +29,9 @@ public class ParseTweetDataBolt extends BaseBasicBolt {
         String city = status.getPlace().getName();
         HashtagEntity[] hashtags = status.getHashtagEntities();
 
-        String[] hashTagText = new String[hashtags.length];
-        for (int i = 0; i < hashtags.length; i ++){
-            hashTagText[i] = hashtags[i].getText();
+        List<String> hashTagText = new ArrayList<String>();
+        for (int i = 0; i < hashtags.length; i++){
+            hashTagText.add(i, hashtags[i].getText());
         }
 
         collector.emit(new Values(id,content,uName, createdAt, lat,lng,city,hashTagText));
@@ -37,6 +39,6 @@ public class ParseTweetDataBolt extends BaseBasicBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("id", "content", "userName", "createdAt", "lat", "lng", "city", "hashTagtext"));
+        declarer.declare(new Fields("id", "content", "userName", "createdAt", "lat", "lng", "city", "hashTagText"));
     }
 }
