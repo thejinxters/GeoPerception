@@ -59,7 +59,7 @@
           <includeProjectDependencies>true</includeProjectDependencies>
           <includePluginDependencies>false</includePluginDependencies>
           <classpathScope>compile</classpathScope>
-          <mainClass>com.geoperception.topologies.StartingTopology</mainClass>
+          <mainClass>com.geoperception.topologies.TweetStorageTopology</mainClass>
         </configuration>
       </plugin>
 
