@@ -25,7 +25,7 @@ public class ParseTweetDataBolt extends BaseBasicBolt {
             Status status = (Status) input.getValueByField("geotweet");
             long id = status.getId();
             String content = status.getText();
-            String uName = status.getUser().getName();
+            String uName = status.getUser().getScreenName();
             Date createdAt = status.getCreatedAt();
             double lat = status.getGeoLocation().getLatitude();
             double lng = status.getGeoLocation().getLongitude();
