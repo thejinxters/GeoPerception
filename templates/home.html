@@ -65,8 +65,8 @@
   </div>
   <div id="map-canvas"></div>
   <ul>
-  {% for location in locations %}
-    <li>{{ location.name }}</li>
+  {% for tweet in tweets %}
+    <li>{{ tweet.username}} - {{ tweet.content }}</li>
   {% endfor %}
   </ul>
 

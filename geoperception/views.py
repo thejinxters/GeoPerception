@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 # from django.http import HttpResponse
-from geoperception.models import Locations
+from geoperception.models import Tweets
 
 class GenericView(TemplateView):
     template_name = None
@@ -8,7 +8,7 @@ class GenericView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['bob'] = 'test'
-        context['locations'] = Locations.objects.all()
+        context['tweets'] = Tweets.objects.all()
         return context
 
 class HeatmapView(GenericView):
