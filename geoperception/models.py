@@ -7,3 +7,4 @@ class Tweets(Model):
     id = columns.Integer(primary_key=True)
     content = columns.Text()
     username = columns.Text()
+    lat = columns.Float()
