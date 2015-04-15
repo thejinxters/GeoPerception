@@ -27,7 +27,7 @@ public class TopHashtagsBolt extends BaseBasicBolt {
 
         long id = idO.longValue();
 
-        ///************READFROMCASSANDRA***************
+        ///*********************READFROMCASSANDRA***************************//////
 
         for (String tag : hashes){
             Integer count = counts.get(tag);
