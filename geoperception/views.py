@@ -1,31 +1,24 @@
 from django.views.generic import TemplateView
+# from django.http import HttpResponse
+from geoperception.models import Tweets
 
+class GenericView(TemplateView):
+    template_name = None
 
-class HomeView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        context['bob'] = 'test'
+        context['tweets'] = Tweets.objects.all()
+        return context
+
+class HeatmapView(GenericView):
+    template_name = 'heatmap.html'
+
+class HomeView(GenericView):
     template_name = 'home.html'
 
-    def get(self, request, *args, **kwargs):
-        context = {
-          'variable_from_homeview': 'This comes from Geoperception/views.py'
-        }
-        return self.render_to_response(context)
-
-
-class AboutView(TemplateView):
+class AboutView(GenericView):
     template_name = 'about.html'
 
-    def get(self, request, *args, **kwargs):
-        context = {
-          'variable_from_aboutview': 'This comes from Geoperception/views.py'
-        }
-        return self.render_to_response(context)
-
-
-class TeamView(TemplateView):
+class TeamView(GenericView):
     template_name = 'team.html'
-
-    def get(self, request, *args, **kwargs):
-        context = {
-          'variable_from_teamview': 'This comes from Geoperception/views.py'
-        }
-        return self.render_to_response(context)

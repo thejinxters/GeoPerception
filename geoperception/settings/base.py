@@ -45,12 +45,13 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # Application definition
 
 PROJECT_APPS = [
+    'django.contrib.staticfiles',
+    'django_cassandra_engine',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
 ]
 
 DEVELOPMENT_APPS = [
@@ -76,11 +77,24 @@ WSGI_APPLICATION = 'geoperception.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+# https://github.com/r4fek/django-cassandra-engine
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'cassandra': {
+        'ENGINE': 'django_cassandra_engine',
+        'NAME': 'geoperception',
+        'TEST_NAME': 'test_db',
+        'HOST': '54.191.211.194',
+        'OPTIONS': {
+            'replication': {
+                'strategy_class': 'SimpleStrategy',
+                'replication_factor': 1
+            }
+        }
     }
 }
 
@@ -102,4 +116,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), os.path.join(BASE_DIR, 'vendor'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), os.path.join(BASE_DIR, 'vendor'), ]

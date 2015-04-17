@@ -23,7 +23,7 @@ mvn compile exec:java -Dexec.args="<ConsumerKey> <ConsumerSecret> <AccessToken> 
 4. Select your JDK
 5. Select 'run > Edit configurations'
 6. Add a new Maven configuration
-7. In the 'command line field enter' `compile exec:java -Dexec.args="<ConsumerKey> <ConsumerSecret> <AccessToken> <AccessTokenSecret>"`
+7. In the 'command line field enter' `compile exec:java -Dexec.args="<ConsumerKey> <ConsumerSecret> <AccessToken> <AccessTokenSecret> <GoogleAuthKey>"`
 
 
 

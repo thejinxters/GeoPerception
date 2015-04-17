@@ -8,6 +8,12 @@
 
   <dependencies>
 
+      <dependency>
+          <groupId>com.google.maps</groupId>
+          <artifactId>google-maps-services</artifactId>
+          <version>0.1.6</version>
+      </dependency>
+
     <dependency>
       <groupId>org.twitter4j</groupId>
       <artifactId>twitter4j-stream</artifactId>
