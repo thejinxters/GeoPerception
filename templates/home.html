@@ -64,5 +64,10 @@
     <button id="drop" onclick="clearMarkers()">Clear Markers</button>
   </div>
   <div id="map-canvas"></div>
+  <ul>
+  {% for tweet in tweets %}
+    <li>{{ tweet.username}} - {{ tweet.content }} -- {{tweet.lat}}</li>
+  {% endfor %}
+  </ul>
 
 {% endblock %}
