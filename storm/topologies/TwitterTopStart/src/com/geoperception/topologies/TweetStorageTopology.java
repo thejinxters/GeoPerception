@@ -71,7 +71,14 @@ public class TweetStorageTopology {
 
         cluster.submitTopology("starter", conf, builder.createTopology());
 
-        Utils.sleep(600000);
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//
         cluster.shutdown();
+//        Utils.sleep(600000);
+//        cluster.shutdown();
     }
 }
