@@ -10,7 +10,16 @@
 
   <div id="panel" style="margin-left: -52px">
       <button id="drop" onclick="addRandomValues()">Add 10000 Random Values</button>
+      <button id="drop" onclick="addCassandraValues()">Add Data from Cassandra</button>
   </div>
   <div id="map-canvas"></div>
+
+  <script>
+  function addCassandraValues() {
+      {% for tweet in tweets %}
+        pointArray.push(new google.maps.LatLng({{tweet.lat}},{{tweet.lng}}));
+      {% endfor %}
+  }
+</script>
 
   {% endblock %}
