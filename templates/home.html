@@ -50,13 +50,38 @@
     }
 
     function addCassandraTweets() {
+      var tweetMarkers = []
+      var tweetContent = []
+
       {% for tweet in tweets %}
-      markers.push(new google.maps.Marker({
-        position: new google.maps.LatLng({{tweet.lat}}, {{tweet.lng}}),
-        map: map,
-        icon: image,
-        title: 'tweet'
-      }));
+      try {
+
+        // var username = "{{tweet.username|escapejs}}";
+        // var content = "{{tweet.content|escapejs}}";
+        // var contentString = '<div><h4>TWEET from '+ username +'!</h4></div>' +
+        //                     '<div class="tweet-content">'+
+        //                     content +
+        //                     '</div>';
+
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng({{tweet.lat}}, {{tweet.lng}}),
+          map: map,
+          icon: image,
+          title: 'tweet'
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          new google.maps.InfoWindow({
+            content: '<div><h4>TWEET from {{tweet.username|escapejs}}!</h4></div>' +
+                      '<div class="tweet-content">'+
+                      '{{tweet.content|escapejs}}' +
+                      '</div>'
+          }).open(map,this);
+        });
+        markers.push(marker);
+      }
+      catch(err) {
+        console.log(err.message);
+      }
       {% endfor %}
     }
 
