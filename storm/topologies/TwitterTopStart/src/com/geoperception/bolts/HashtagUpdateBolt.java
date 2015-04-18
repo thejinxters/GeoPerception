@@ -1,73 +1,57 @@
 package com.geoperception.bolts;
 
+
+
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichBolt;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.utils.Utils;
-import com.datastax.driver.core.BoundStatement;
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.PreparedStatement;
-import com.datastax.driver.core.Session;
+import com.datastax.driver.core.*;
 import com.datastax.driver.core.exceptions.NoHostAvailableException;
 import com.datastax.driver.core.policies.DowngradingConsistencyRetryPolicy;
 import com.datastax.driver.core.policies.ExponentialReconnectionPolicy;
 import com.datastax.driver.core.policies.RoundRobinPolicy;
 import com.datastax.driver.core.policies.TokenAwarePolicy;
-import com.google.common.base.Preconditions;
+import com.datastax.driver.core.querybuilder.QueryBuilder;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by jinxters on 3/13/15.
+ * Created by jinxters on 4/17/15.
  */
-public class CassandraWriteBolt extends BaseRichBolt {
+public class HashtagUpdateBolt extends BaseRichBolt {
 
     OutputCollector outputCollector;
     Map<String,String> config;
     Cluster cassandraCluster;
     Session session;
-    String component;
     String cql;
     PreparedStatement statement;
+    String counts_table = "hashtag_counts";
+    String tweetid_table = "hashtag_tweets";
 
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         outputCollector = collector;
         config = (Map <String,String>) stormConf;
         cassandraCluster = setupCasandraClient(config.get("cassandra.nodes").split(","));
-        session = CassandraWriteBolt.getSessionWithRetry(cassandraCluster, config.get("cassandra.keyspace"));
-        component = context.getThisComponentId();
-        cql = config.get(component + ".cql");
-
-        System.out.println("Statement = " + cql);
-        Preconditions.checkArgument(cql != null, "CassandraWriteBolt: " + component +
-                " is missing a cql statement in bolt config");
-
-        statement = session.prepare(cql);
-
+        session = getSessionWithRetry(cassandraCluster, config.get("cassandra.keyspace"));
     }
 
     @Override
     public void execute(Tuple input) {
-
-        Object id = input.getValueByField("id");
-        Object content = input.getValueByField("content");
-        Object userName = input.getValueByField("userName");
-        Object createdAt = input.getValueByField("createdAt");
-        Object lat = input.getValueByField("lat");
-        Object lng = input.getValueByField("lng");
-        Object city = input.getValueByField("city");
-        Object hashtags = input.getValueByField("hashTagText");
-        Object[] tweetArray = new Object[] {content, userName, createdAt, lat, lng, city, hashtags, id};
+        String hashtag = (String) input.getValueByField("hashtag");
+        Long tweetId = (Long) input.getValueByField("tweetId");
 
         try{
-            BoundStatement bound = statement.bind(tweetArray);
-            session.execute(bound);
-            outputCollector.ack(input);
-            System.out.println("Writing to cassandra");
+            Row row = updateHashtag(hashtag, tweetId);
+            Long count;
+            count = row.getLong("count");
+            System.out.println("Writing hashtag to cassandra -  "+hashtag+": "+count);
         }
         catch (Throwable t) {
             outputCollector.reportError(t);
@@ -77,7 +61,23 @@ public class CassandraWriteBolt extends BaseRichBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        // Not used
+        //Not used
+    }
+
+    public Row updateHashtag(String hashtag, Long tweetId) {
+        Statement incrementCounter = QueryBuilder.update(counts_table)
+                .with(QueryBuilder.incr("count", 1))
+                .where(QueryBuilder.eq("hashtag", hashtag));
+        session.execute(incrementCounter).one();
+
+        Statement addTweetId = QueryBuilder.update(tweetid_table)
+                .with(QueryBuilder.append("tweetIds", tweetId ))
+                .where(QueryBuilder.eq("hashtag", hashtag));
+        session.execute(addTweetId);
+        Statement selectRow = QueryBuilder.select()
+                .from(counts_table)
+                .where(QueryBuilder.eq("hashtag", hashtag));
+        return session.execute(selectRow).one();
     }
 
     public static Cluster setupCasandraClient(String [] nodes){
