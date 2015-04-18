@@ -3,6 +3,7 @@ package com.geoperception.topologies;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
+import backtype.storm.tuple.Fields;
 import backtype.storm.utils.Utils;
 import com.geoperception.bolts.*;
 import com.geoperception.spouts.BasicTwitterSpout;
@@ -30,10 +31,10 @@ public class TweetStorageTopology {
         //***************************Properties***************************
         Properties properties = new Properties();
         try {
-            InputStream is = StartingTopology.class.getClassLoader()
+            InputStream is = TweetStorageTopology.class.getClassLoader()
                     .getResourceAsStream("development.properties");
             if (is == null) {
-                System.out.println(StartingTopology.class.getClassLoader());
+                System.out.println(TweetStorageTopology.class.getClassLoader());
                 throw new RuntimeException("Classpath missing development.properties file");
             }
             properties.load(is);
@@ -46,14 +47,16 @@ public class TweetStorageTopology {
         TopologyBuilder builder = new TopologyBuilder();
 
         //***************************Spouts***************************
-        builder.setSpout("tweetspout", new BasicTwitterSpout(consumerKey,consumerSecret,
-                accessToken,accessTokenSecret,keyWords),5);
+        builder.setSpout("tweetspout", new BasicTwitterSpout(consumerKey, consumerSecret,
+                accessToken, accessTokenSecret, keyWords), 5);
 
         //***************************Bolts***************************
 
         builder.setBolt("limiter", new GeotagLimiterBolt()).shuffleGrouping("tweetspout");
         builder.setBolt("parser", new ParseTweetDataBolt()).shuffleGrouping("limiter");
-        builder.setBolt("saveTweet", new CassandraWriteBolt()).shuffleGrouping("parser");
+        builder.setBolt("saveTweet", new TweetWriteBolt()).shuffleGrouping("parser");
+        builder.setBolt("hashtagEmitter", new HashtagEmitterBolt()).shuffleGrouping("parser");
+        builder.setBolt("writeHashtag", new HashtagUpdateBolt()).fieldsGrouping("hashtagEmitter", new Fields("hashtag"));
 
         
         //***************************Start Stream***************************

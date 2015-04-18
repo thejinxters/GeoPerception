@@ -8,12 +8,8 @@ import java.util.Properties;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.tuple.Fields;
 import backtype.storm.utils.Utils;
-import com.geoperception.bolts.CassandraWriteBolt;
-import com.geoperception.bolts.LocationCounter;
 import com.geoperception.bolts.LocationFetch;
-import com.geoperception.bolts.PrinterBolt;
 
 import com.geoperception.spouts.BasicTwitterSpout;
 
