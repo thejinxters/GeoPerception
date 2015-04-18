@@ -8,3 +8,4 @@ class Tweets(Model):
     content = columns.Text()
     username = columns.Text()
     lat = columns.Float()
+    lng = columns.Float()

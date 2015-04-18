@@ -22,6 +22,7 @@
       };
       map = new google.maps.Map(document.getElementById('map-canvas'),
               mapOptions);
+      addCassandraTweets();
     }
 
     // When Drop is clicked, set up large amount of inserts
@@ -48,6 +49,17 @@
       }));
     }
 
+    function addCassandraTweets() {
+      {% for tweet in tweets %}
+      markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng({{tweet.lat}}, {{tweet.lng}}),
+        map: map,
+        icon: image,
+        title: 'tweet'
+      }));
+      {% endfor %}
+    }
+
     // When clear is clicked, remove all markers
     function clearMarkers() {
       for (var i = 0; i < markers.length; i++) {
@@ -62,12 +74,9 @@
   <div id="panel" style="margin-left: -52px">
     <button id="drop" onclick="drop()">Drop Markers</button>
     <button id="drop" onclick="clearMarkers()">Clear Markers</button>
+    <button id="cassandra" onclick="addCassandraTweets()">Add Cassandra Data()</button>
   </div>
   <div id="map-canvas"></div>
   <ul>
-  {% for tweet in tweets %}
-    <li>{{ tweet.username}} - {{ tweet.content }} -- {{tweet.lat}}</li>
-  {% endfor %}
-  </ul>
 
 {% endblock %}
