@@ -10,18 +10,18 @@ import java.util.PriorityQueue;
  */
 public class TopHashtagsQueue {
 
-    private static TopHashtagsQueue hashtagsQueue;
-    private PriorityQueue<Row> queue = new PriorityQueue<Row>(200, Row.getLong("count"));
+//    private static TopHashtagsQueue hashtagsQueue;
+//    private PriorityQueue<Row> queue = new PriorityQueue<Row>(200, Row.getLong("count"));
 
-    private TopHashtagsQueue(){
-    }
+//    private TopHashtagsQueue(){
+//    }
 
-    public static TopHashtagsQueue getInstance(){
-        if (hashtagsQueue == null){
-            hashtagsQueue = new TopHashtagsQueue();
-        }
-        return hashtagsQueue;
-    }
+//    public static TopHashtagsQueue getInstance(){
+//        if (hashtagsQueue == null){
+//            hashtagsQueue = new TopHashtagsQueue();
+//        }
+//        return hashtagsQueue;
+//    }
 
 
 

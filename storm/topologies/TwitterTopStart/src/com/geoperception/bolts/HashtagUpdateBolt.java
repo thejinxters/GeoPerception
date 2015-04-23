@@ -6,7 +6,9 @@ import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichBolt;
+import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 import com.datastax.driver.core.*;
 import com.datastax.driver.core.exceptions.NoHostAvailableException;
@@ -57,11 +59,13 @@ public class HashtagUpdateBolt extends BaseRichBolt {
             outputCollector.reportError(t);
             outputCollector.fail(input);
         }
+
+        outputCollector.emit(new Values(hashtag));
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        //Not used
+        declarer.declare(new Fields("hashtag"));
     }
 
     public Row updateHashtag(String hashtag, Long tweetId) {

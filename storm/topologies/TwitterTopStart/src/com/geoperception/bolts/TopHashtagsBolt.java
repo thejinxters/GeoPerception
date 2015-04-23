@@ -60,29 +60,57 @@ public class TopHashtagsBolt extends BaseRichBolt {
                 .all().from("top_hashtags");
         List<Row> topHashtags = session.execute(getTopHashtags).all();
 
+
+        Long lowestCount = null;
+        String lowestHashtag = null;
+        boolean inTopHashtags = false;
+        boolean topHashtagsNotFull = false;
+
         if ( topHashtags.size() < 200) {
             // Hahstag table not filled yet
+            topHashtagsNotFull = true;
         }
 
         // logic for determining if current is top hashtag
-//        Tuple<String, Long> lowestCount = new Tuple<String, Long>();
-        Long lowestCount = null;
-        String lowestHashtag = null;
-
-
         for (Row hashtagRow : topHashtags){
             String currentName = hashtagRow.getString("hashtag");
             Long currentCount = hashtagRow.getLong("count");
+            if (lowestCount == null){
+                lowestHashtag = currentName;
+                lowestCount = currentCount;
+            }
             if (currentName.equals(hashtag)){
                 // Already in top hashtags
+                inTopHashtags = true;
             }
-
+            if (currentCount < lowestCount){
+                lowestHashtag = currentName;
+                lowestCount = currentCount;
+            }
         }
 
+        Statement addTopHashtag = null;
 
+        if (topHashtagsNotFull || inTopHashtags){
+            // ADD IT!!
+            addTopHashtag = QueryBuilder.update("top_hashtags")
+                    .with(QueryBuilder.set("count", count))
+                    .where(QueryBuilder.eq("hashtag", hashtag));
+        }
+        else if (count > lowestCount){
+            // REMOVE LOWEST HASHTAG AND ADD THIS ONE
+            Statement removeTopHashtag = QueryBuilder.delete()
+                    .from("top_hashtags")
+                    .where(QueryBuilder.eq("hashtag", lowestHashtag));
+            session.execute(removeTopHashtag);
+            addTopHashtag = QueryBuilder.insertInto("top_hashtags")
+                    .value("hashtag", hashtag)
+                    .value("count", count);
+        }
 
-
-
+        if (addTopHashtag != null){
+            session.execute(addTopHashtag);
+        }
 
     }
 

@@ -57,6 +57,7 @@ public class TweetStorageTopology {
         builder.setBolt("saveTweet", new TweetWriteBolt()).shuffleGrouping("parser");
         builder.setBolt("hashtagEmitter", new HashtagEmitterBolt()).shuffleGrouping("parser");
         builder.setBolt("writeHashtag", new HashtagUpdateBolt()).fieldsGrouping("hashtagEmitter", new Fields("hashtag"));
+        builder.setBolt("tophashtag", new TopHashtagsBolt()).fieldsGrouping("writeHashtag", new Fields("hashtag"));
 
         
         //***************************Start Stream***************************
