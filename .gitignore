@@ -55,4 +55,8 @@ coverage.xml
 # Intellij
 .idea/
 *.iml
+
+#maven
+/storm/topologies/TwitterTopStart/target/
 out/
+*.out

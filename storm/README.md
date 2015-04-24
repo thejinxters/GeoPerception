@@ -1,9 +1,35 @@
 #Storm-Setup
 **Instructions for running counter **
 
+##Setup Cassandra (required)
+Install Cassndra on a mac with homebrew, `brew install cassandra`
+and `pip install cassandra-driver cql`
+
+
+##Run using Maven
+
+###From the command line
+Once [maven is installed](http://maven.apache.org/download.cgi) (or use brew)
+```
+cd storm/topologies/TwitterTopStart/
+mvn install
+mvn compile exec:java -Dexec.args="<ConsumerKey> <ConsumerSecret> <AccessToken> <AccessTokenSecret>"
+```
+
+###Setup in Intellij
+1. Select Import Project and choose the 'storm/topologies/TwitterTopStart' folder
+2. Select "Maven"
+3. Enable the checkbox 'Import Maven projects automatically'
+4. Select your JDK
+5. Select 'run > Edit configurations'
+6. Add a new Maven configuration
+7. In the 'command line field enter' `compile exec:java -Dexec.args="<ConsumerKey> <ConsumerSecret> <AccessToken> <AccessTokenSecret> <GoogleAuthKey>"`
+
+
+
 ##Run in Terminal
 
-From GeoPerceptionApp directory: 
+From GeoPerceptionApp directory:
 
 ```bash
 cd storm/topologies/TwitterTopStart/src/com/geoperception/startingtop/
