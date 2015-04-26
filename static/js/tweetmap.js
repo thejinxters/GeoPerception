@@ -2,7 +2,6 @@ var usa = new google.maps.LatLng(38.8833, 265.9833);
 
 var markers = [];
 var map;
-var image = "{% static 'images/tweet-30.png' %}";
 
 // Initialize Map
 function initialize() {
@@ -12,7 +11,6 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
           mapOptions);
-  addCassandraTweets();
 }
 
 // When Drop is clicked, set up large amount of inserts
@@ -39,9 +37,22 @@ function addMarker() {
   }));
 }
 
-function addCassandraTweets() {
-  var tweetMarkers = [];
-  var tweetContent = [];
+function addTweetToMap(tweet) {
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(tweet.lat, tweet.lng),
+    map: map,
+    icon: image,
+    title: 'tweet'
+  });
+  google.maps.event.addListener(marker, 'click', function() {
+    new google.maps.InfoWindow({
+      content: '<div><h4>TWEET from' + tweet.username + '!</h4></div>' +
+                '<div class="tweet-content">'+
+                tweet.content +
+                '</div>'
+    }).open(map,this);
+  });
+  markers.push(marker);
 }
 
 // When clear is clicked, remove all markers
@@ -50,6 +61,18 @@ function clearMarkers() {
     markers[i].setMap(null);
   }
   markers = [];
+}
+
+function fitAllMarkersInView(){
+  if (markers.length < 30){
+    var bounds = new google.maps.LatLngBounds();
+    for(i=0;i<markers.length;i++) {
+     bounds.extend(markers[i].getPosition());
+    }
+
+    map.fitBounds(bounds);
+    map.setZoom(4)
+  }
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

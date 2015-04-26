@@ -32,10 +32,10 @@ $(function() {
 function elasticSearch(){
     request = $('#hashtag-search').val();
     var match = { "hashtag": request };
-        var postData = {
-            "query": { "match": match },
-            "fields": ["hashtag", "tweetids"]
-        };
+    var postData = {
+        "query": { "match": match },
+        "fields": ["hashtag", "tweetids"]
+    };
     $.ajax({
         url: hostname + "hashtag_tweets/_search",
         type: "POST",
@@ -55,19 +55,49 @@ function elasticSearch(){
                         tweetlist.push(this.toString());
                     });
                     tweetlist = removeDuplicatesFromArray(tweetlist);
-                    var display = '<ul>'
-                    $(tweetlist).each( function() {
-                        display += '<li>'+this+'</li>'
-                    });
-                    display += '</ul>'
-                    $('#tweetlist-display').html(display);
-                });            }
+                    // var display = '<ul>'
+                    // $(tweetlist).each( function() {
+                    //     display += '<li>'+this+'</li>'
+                    // });
+                    // display += '</ul>'
+                    // $('#tweetlist-display').html(display);
+                });
+                getTweetsFromCassandra(tweetlist);
+            }
             else{
                 $('#tweetlist-display').html("There were no results that matched your query");
             }
         },
     });
 }
+
+// Get tweets for mapping
+function getTweetsFromCassandra(tweetlist){
+    var postData = {
+        'tweetIds' : tweetlist
+    };
+    console.log(postData);
+    $.ajax({
+        url: "/ajax/tweets/",
+        type: "GET",
+        dataType: "JSON",
+        data: postData,
+        success: function(data) {
+            console.log(data);
+            // remove all tweets
+            clearMarkers();
+            // Add tweets to map
+            tweets = data.response;
+            $(data.response).each(function(){
+                addTweetToMap(this);
+            });
+            fitAllMarkersInView();
+        }
+    });
+
+}
+
+
 
 function removeDuplicatesFromArray(array){
     var uniqueNames = [];
