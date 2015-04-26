@@ -45,7 +45,7 @@ body {
     <script type="text/javascript">
 
 var m = [20, 70, 5, 70],
-    w = 1500 - m[1] - m[3],
+    w = 1360 - m[1] - m[3],
     h = 5000 - m[0] - m[2];
 
 var format = d3.format(",.0f");
@@ -74,7 +74,7 @@ d3.csv("{{ STATIC_URL }}sample-data.csv", function(data) {
 
   var bar = svg.selectAll("g.bar")
       .data(data)
-    .enter().append("g")
+      .enter().append("g")
       .attr("class", "bar")
       .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; });
 
@@ -97,7 +97,9 @@ d3.csv("{{ STATIC_URL }}sample-data.csv", function(data) {
 
   svg.append("g")
       .attr("class", "y axis")
+      .on("click", function(d, i) {alert(data.name);})
       .call(yAxis);
+
 });
 
     </script>
