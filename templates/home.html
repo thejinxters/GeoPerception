@@ -8,8 +8,8 @@
 
   <div class="map-area">
     <div class="hashtag-search-form">
-      <form action="">
-        <input type="text" class="hashtag-search-input" placeholder="SearchForHashtag"/>
+      <form action="" onsubmit="elasticSearch(); return false;">
+        <input type="text" id="hashtag-search" class="hashtag-search-input" placeholder="SearchForHashtag"/>
         <button class="hashtag-search-submit">Search</button>
       </form>
     </div>
@@ -39,6 +39,9 @@
        </ul>
     </div>
   </div>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/tweetmap.js"></script>
 
+  <div id="tweetlist-display">
+  </div>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/tweetmap.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/search.js"></script>
 {% endblock %}
