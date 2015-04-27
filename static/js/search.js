@@ -76,25 +76,60 @@ function getTweetsFromCassandra(tweetlist){
     var postData = {
         'tweetIds' : tweetlist
     };
-    console.log(postData);
     $.ajax({
         url: "/ajax/tweets/",
         type: "GET",
         dataType: "JSON",
         data: postData,
         success: function(data) {
-            console.log(data);
             // remove all tweets
             clearMarkers();
             // Add tweets to map
             tweets = data.response;
-            $(data.response).each(function(){
+            $(tweets).each(function(){
                 addTweetToMap(this);
             });
             fitAllMarkersInView();
+            addHashtagsToSidebar(tweets)
         }
     });
+}
 
+function addHashtagsToSidebar(tweets){
+    hashtagCollection = {}
+    $(tweets).each( function() {
+        var hashtags = this.hashtags;
+        $(hashtags).each( function() {
+            var hashtag = this.toString();
+            if (hashtagCollection[hashtag]){
+                hashtagCollection[hashtag] = hashtagCollection[hashtag] + 1;
+            }
+            else{
+                hashtagCollection[hashtag] = 1;
+            }
+        });
+    });
+
+    var tuples = [];
+    for (var key in hashtagCollection) tuples.push([key, hashtagCollection[key]]);
+    tuples.sort(function(a, b) {
+        a = a[1];
+        b = b[1];
+        return a > b ? -1 : (a < b ? 1 : 0);
+    });
+
+    var display = '<ul>'
+    for (var i = 0; i < tuples.length; i++) {
+        var key = tuples[i][0];
+        var value = tuples[i][1];
+        // console.log("key:"+key+" value:"+value);
+
+        display += '<li><a class="item">';
+        display += key + ' ('+ value + ')';
+        display += '</a></li>';
+    }
+    display += '</ul>';
+    $('.related-hashtags').html(display);
 }
 
 

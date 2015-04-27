@@ -51,8 +51,16 @@ function addTweetToMap(tweet) {
                 tweet.content +
                 '</div>'
     }).open(map,this);
+    linkifyTweet()
   });
   markers.push(marker);
+}
+
+function linkifyTweet(){
+  console.log("in linkify");
+  window.setTimeout(function() {
+      $('.tweet-content').linkify();;
+    }, 300);
 }
 
 // When clear is clicked, remove all markers
