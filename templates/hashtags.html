@@ -97,10 +97,21 @@ d3.csv("{{ STATIC_URL }}sample-data.csv", function(data) {
 
   svg.append("g")
       .attr("class", "y axis")
-      .on("click", function(d, i) {alert(data.name);})
-      .call(yAxis);
+	  
+      .call(yAxis)
+      .on("click", function(d, i) { 
+		  y. domain = data.map(function(d) { return d.name; 
+			  })
+		for (var i = 0; i < 25; i++) {
+			if(((this, "clicked").text) == y.domain[i])
+			{
+			alert(y.domain[i]);
+		}
+		else{alert((this, "clicked").text)}
+		}
+		});
 
-});
+	});
 
     </script>
   </body>
