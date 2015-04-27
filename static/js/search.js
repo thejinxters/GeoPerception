@@ -55,12 +55,6 @@ function elasticSearch(){
                         tweetlist.push(this.toString());
                     });
                     tweetlist = removeDuplicatesFromArray(tweetlist);
-                    // var display = '<ul>'
-                    // $(tweetlist).each( function() {
-                    //     display += '<li>'+this+'</li>'
-                    // });
-                    // display += '</ul>'
-                    // $('#tweetlist-display').html(display);
                 });
                 getTweetsFromCassandra(tweetlist);
             }
@@ -95,6 +89,7 @@ function getTweetsFromCassandra(tweetlist){
     });
 }
 
+
 function addHashtagsToSidebar(tweets){
     hashtagCollection = {}
     $(tweets).each( function() {
@@ -124,7 +119,8 @@ function addHashtagsToSidebar(tweets){
         var value = tuples[i][1];
         // console.log("key:"+key+" value:"+value);
 
-        display += '<li><a class="item">';
+        display += '<li><a class="item" ';
+        display += 'onclick="sidebarHashtagClick(\''+key+'\')">'
         display += key + ' ('+ value + ')';
         display += '</a></li>';
     }
@@ -132,6 +128,11 @@ function addHashtagsToSidebar(tweets){
     $('.related-hashtags').html(display);
 }
 
+
+function sidebarHashtagClick(hashtag){
+    $('#hashtag-search').val(hashtag);
+    elasticSearch();
+}
 
 
 function removeDuplicatesFromArray(array){
