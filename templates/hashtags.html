@@ -56,13 +56,10 @@ var x = d3.scale.linear().range([0, w]),
 var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
     yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
-var svg = d3.select("body").append("svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-	.append("g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")")
+
 
 d3.json("{{ STATIC_URL }}sample-data.json", function(error, data) {
+
 
   // Parse counts, and sort by count.
   data.forEach(function(d) { d.count = +d.count; });
@@ -71,7 +68,16 @@ d3.json("{{ STATIC_URL }}sample-data.json", function(error, data) {
   // Set the scale domain.
 	x.domain([0, d3.max(data, function(d){return d.count})]);
     y.domain(data.map(function(d) { return d.hashtag; }));
-    
+ 
+  var svg = d3.select("body").append("svg")
+	.data(data)
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+	
+	.append("g")
+	 
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")")  
+     
 
   var bar = svg.selectAll("g.bar")
       .data(data)
@@ -106,10 +112,11 @@ d3.json("{{ STATIC_URL }}sample-data.json", function(error, data) {
    
    
   svg.append("g")
-	.data(data)
+	.data(data)	
 	
-      .attr("class", "y axis")   
-      .call(yAxis);
+      .attr("class", "y axis") 
+      .call(yAxis)
+     
 
 
 	  
