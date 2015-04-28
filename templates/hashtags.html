@@ -18,7 +18,7 @@ body {
   fill: gray;
 }
 
-.bar text.value {
+.bar text.count {
   fill: white;
 }
 
@@ -62,57 +62,55 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-d3.csv("{{ STATIC_URL }}sample-data.csv", function(data) {
+d3.json("{{ STATIC_URL }}sample-data.json", function(error, data) {
 
-  // Parse numbers, and sort by value.
-  data.forEach(function(d) { d.value = +d.value; });
-  data.sort(function(a, b) { return b.value - a.value; });
+  // Parse counts, and sort by count.
+  data.forEach(function(d) { d.count = +d.count; });
+  data.sort(function(a, b) { return b.count - a.count; });
 
   // Set the scale domain.
-  x.domain([0, d3.max(data, function(d) { return d.value; })]);
-  y.domain(data.map(function(d) { return d.name; }));
+	x.domain([0, d3.max(data, function(d){return d.count})]);
+    y.domain(data.map(function(d) { return d.hashtag; }));
 
   var bar = svg.selectAll("g.bar")
       .data(data)
       .enter().append("g")
       .attr("class", "bar")
-      .attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; });
+	
+      .attr("transform", function(d) { return "translate(0," + y(d.hashtag) + ")"; });
+      
+      
+
 
   bar.append("rect")
-      .attr("width", function(d) { return x(d.value); })
+      .attr("width", function(d) { return x(d.count); })
       .attr("height", y.rangeBand());
 
   bar.append("text")
-      .attr("class", "value")
-      .attr("x", function(d) { return x(d.value); })
+      .attr("class", "count")
+      .attr("x", function(d) { return x(d.count); })
       .attr("y", y.rangeBand() / 2)
       .attr("dx", -3)
       .attr("dy", ".35em")
       .attr("text-anchor", "end")
-      .text(function(d) { return format(d.value); });
+      .text(function(d) { return format(d.count); });
 
   svg.append("g")
       .attr("class", "x axis")
       .call(xAxis);
 
+   
+   
   svg.append("g")
+		.data(data)
       .attr("class", "y axis")
-	  
-      .call(yAxis)
-      .on("click", function(d, i) { 
-		  y. domain = data.map(function(d) { return d.name; 
-			  })
-		for (var i = 0; i < 25; i++) {
-			if(((this, "clicked").text) == y.domain[i])
-			{
-			alert(y.domain[i]);
-		}
-		else{alert((this, "clicked").text)}
-		}
-		});
+      .on("click", function(d, i) { alert(d.text)})
+      .call(yAxis);
 
-	});
+	  
+});
 
     </script>
   </body>
   {% endblock %}
+
