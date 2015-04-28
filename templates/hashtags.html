@@ -104,7 +104,6 @@ d3.json("{{ STATIC_URL }}sample-data.json", function(error, data) {
   svg.append("g")
 		.data(data)
       .attr("class", "y axis")
-      .on("click", function(d, i) { alert(d.text)})
       .call(yAxis);
 
 	  
