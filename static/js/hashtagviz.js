@@ -11,7 +11,7 @@ var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
     yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
 
-d3.json("{{ STATIC_URL }}sample-data.json", function(error, data) {
+d3.json(d3Datafile, function(error, data) {
 
   // Parse counts, and sort by count.
   data = topHashtagsObject;

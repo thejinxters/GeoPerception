@@ -230,6 +230,10 @@ nav.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a{
 
 
 /* Top Hashtags */
+#top-hashtags{
+  margin: 100px 0px 50px;
+}
+
 .top-hashtags-viz {
   font-size: 12px;
 }
@@ -337,18 +341,18 @@ nav.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a{
 	}
 }
 
-.rollover a {     
+.rollover a {
 	display : block;
     width : 200px;
     height : 200px;
-    background-image:url(../static/images/jacob.png); 
+    background-image:url(../static/images/jacob.png);
 }
 
-.rollover a:hover { 
+.rollover a:hover {
 	display : block;
 	width : 200px;
 	height : 200px;
-	background-image:url(../static/images/mlp3.png); 
+	background-image:url(../static/images/mlp3.png);
 }
 
 
