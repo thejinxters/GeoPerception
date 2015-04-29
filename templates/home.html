@@ -41,9 +41,31 @@
        <li class="hashtag"><a href="#">#Inspiration</a></li> -->
      </ul>
    </div>
- </div>
+  </div>
+</div>
 
-<script> var image = "{% static 'images/tweet-30.png' %}"; </script>
+<div class="row">
+  <h1> Most Common Hashtags </h1>
+  <div class="top-hashtags-viz"></div>
+</div>
+
+<script type="text/javascript">
+  // create top-hashtags object
+  var topHashtagsObject = [
+    {% for hashtag in top_hashtags|dictsortreversed:"count"%}
+      {
+        hashtag: '{{ hashtag.hashtag | escapejs }}',
+        count: '{{ hashtag.count | escapejs }}'
+      },
+    {% endfor %}
+  ]
+  //twitter image
+  var image = "{% static 'images/tweet-30.png' %}";
+</script>
+
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/d3.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/hashtagviz.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/tweetmap.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/search.js"></script>
 

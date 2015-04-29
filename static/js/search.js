@@ -120,7 +120,7 @@ function addHashtagsToSidebar(tweets){
         // console.log("key:"+key+" value:"+value);
 
         display += '<li><a class="item" ';
-        display += 'onclick="sidebarHashtagClick(\''+key+'\')">'
+        display += 'onclick="hashtagClick(\''+key+'\')">'
         display += key + ' ('+ value + ')';
         display += '</a></li>';
     }
@@ -129,7 +129,7 @@ function addHashtagsToSidebar(tweets){
 }
 
 
-function sidebarHashtagClick(hashtag){
+function hashtagClick(hashtag){
     $('#hashtag-search').val(hashtag);
     elasticSearch();
 }
