@@ -72,7 +72,7 @@ function getTweetsFromCassandra(tweetlist){
     };
     $.ajax({
         url: "/ajax/tweets/",
-        type: "GET",
+        type: "POST",
         dataType: "JSON",
         data: postData,
         success: function(data) {
@@ -113,7 +113,7 @@ function addHashtagsToSidebar(tweets){
         return a > b ? -1 : (a < b ? 1 : 0);
     });
 
-    var display = '<ul>'
+    var display = '<ul class="hashtags">'
     for (var i = 0; i < tuples.length; i++) {
         var key = tuples[i][0];
         var value = tuples[i][1];

@@ -36,7 +36,7 @@ class HashtagView(GenericView):
 # Ajax Functions
 class Ajax:
     def get_tweet_data(request):
-        tweet_id_list = request.GET.getlist('tweetIds[]')
+        tweet_id_list = request.POST.getlist('tweetIds[]')
         tweet_query = str(tweet_id_list).replace("'", "").strip('[]')
         try:
             cursor = connections['cassandra'].cursor()
