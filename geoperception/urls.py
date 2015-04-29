@@ -9,7 +9,6 @@ urlpatterns = patterns('',
     url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^team/$', TeamView.as_view(), name='team'),
     url(r'^heatmap/$', HeatmapView.as_view(), name='heatmap'),
-    url(r'^hashtags/$', HashtagView.as_view(), name='hashtags'),
 
     # Imported Views
     url(r'^admin/', include(admin.site.urls)),

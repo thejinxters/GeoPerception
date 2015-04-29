@@ -23,7 +23,7 @@
 
   <div class="hashtag-sidebar col-md-3">
     <div class="top-hashtags-link">
-      <a href="#">SEE TOP HASHTAGS</a>
+      <a href="#" onclick="scrollToTopHashtags()">SEE TOP HASHTAGS</a>
     </div>
     <div class="related-hashtags-container">
       <div class="related-hashtags-title">
@@ -45,7 +45,7 @@
 </div>
 
 <div class="row">
-  <h1> Most Common Hashtags </h1>
+  <h1 id="top-hashtags">Top Hashtags</h1>
   <div class="top-hashtags-viz"></div>
 </div>
 
@@ -61,6 +61,12 @@
   ]
   //twitter image
   var image = "{% static 'images/tweet-30.png' %}";
+
+  function scrollToTopHashtags(){
+    $('html, body').animate({
+        scrollTop: $("#top-hashtags").offset().top - 85
+    }, 300);
+  }
 </script>
 
 
