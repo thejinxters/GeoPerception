@@ -290,3 +290,22 @@ nav.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a{
 	  height: 250px;
 	}
 }
+
+.rollover a {     
+	display : block;
+    width : 200px;
+    height : 200px;
+    background-image:url(../static/images/jacob.png); 
+}
+
+.rollover a:hover { 
+	display : block;
+	width : 200px;
+	height : 200px;
+	background-image:url(../static/images/mlp3.png); 
+}
+
+
+
+
+
