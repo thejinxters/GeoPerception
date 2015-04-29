@@ -3,6 +3,7 @@ var usa = new google.maps.LatLng(38.8833, 265.9833);
 var markers = [];
 var map;
 var infowindow;
+var currentMarker;
 
 // Initialize Map
 function initialize() {
@@ -26,8 +27,12 @@ function initialize() {
     if (places.length == 0) {
       return;
     }
-    for (var i = 0, marker; marker = markers[i]; i++) {
-      marker.setMap(null);
+    // for (var i = 0, marker; marker = markers[i]; i++) {
+    //   marker.setMap(null);
+    // }
+
+    if (currentMarker){
+      currentMarker.setMap(null);
     }
 
     // For each place, get the icon, place name, and location.
@@ -43,19 +48,20 @@ function initialize() {
       };
 
       // Create a marker for each place.
-      var marker = new google.maps.Marker({
+      currentMarker = new google.maps.Marker({
         map: map,
         icon: image,
         title: place.name,
         position: place.geometry.location
       });
 
-      markers.push(marker);
+      markers.push(currentMarker);
 
       bounds.extend(place.geometry.location);
     }
 
     map.fitBounds(bounds);
+    map.setZoom(10)
   });
 
   google.maps.event.addListener(map, 'bounds_changed', function() {
