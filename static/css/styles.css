@@ -133,7 +133,10 @@ nav.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a{
 }
 
 .hashtags a.item:hover{
-	background-color: #efffff;
+	background-color: #afffff;
+}
+.hashtags a.item:before {
+  content: '#';
 }
 
 /* Let's get this party started */
