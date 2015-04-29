@@ -3,16 +3,16 @@
 {% block pagetitle %}Geoperception - About the project{% endblock %}
 
 {% block content %}
-    
+
     <div class="col-md-6" "meet-the-team">
 	<h3> About Our Project </h3>
 	<p>This project analyzes Geodata to map trends in hashtags on Twitter. By mapping these hastags, we can see the exact location of people who are tweeting
-	about trending hashtags as well as what they are saying. By looking at these trends on the map we will correlate them to events that are happening 
+	about trending hashtags as well as what they are saying. By looking at these trends on the map we will correlate them to events that are happening
 	in real life. For instance, you can see trends in world events going on by looking at tweets such as <b>#NepalEarthquake</b> or <b>#Baltimore Riots</b>.
 	This app also can help you find things that are trending on the internet by looking at hastags such as <b>#MattsNewVideo</b>. Our map is helpful in order
 	to see what parts of the world and country are concerned about what events.
 	</p>
-	
+
 </div>
 <div class="col-md-6" "meet-the-team">
 
@@ -24,69 +24,56 @@
 
 <div class="col-md-6" "meet-the-team">
 <div class="col-md-4" ><img src="../static/images/About Page Images/cassandra.png" class="img-team"></div>
-<div class="col-md-8">	
+<div class="col-md-8">
 	<h3>Cassandra </h3>
-	<p>Cassiane Cladis is a first year Masters student studying Information and Communication, Technology for Development. 
-	She holds a Bachelors of Science in International Affairs from the University of Colorado at Boulder. She spends most of 
-	her time and income traveling.</p>
+	<p>All of our tweet storage is done using Cassandra and the Datastax api. As a robust NoSQL database, it was perfect for storing large amounts of data that can be accessed via a tweet Id.</p>
 
 </div>
 <br></br>
 
 <div class="col-md-4" ><img src="../static/images/About Page Images/django.png" class="img-team"></div>
-<div class="col-md-8">	
+<div class="col-md-8">
 	<h3> Django/Python3 </h3>
-	<p>Brandon Mikulka proin vitae elit auctor, eleifend elit a, hendrerit metus. Phasellus non turpis sit amet lorem rutrum rhoncus
-	 non vel diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam erat volutpat. Quisque 
-	 lorem nulla, consequat et euismod in, maximus fermentum odio.</p>
+	<p>We created our web frontend using the Django Python3 framework and using Apache to serve it. Since we had so many python experts in the group, it seemed reasonable to use a python based front-end for delivering our content.</p>
 </div>
 
 <br></br>
 
 <div class="col-md-4" ><img src="../static/images/About Page Images/storm.png" class="img-team"></div>
-<div class="col-md-8">	
+<div class="col-md-8">
 	<h3> Storm </h3>
-	<p>John-Luke Bukavalas praesent ac nisl maximus, tempus massa in, porttitor est. Phasellus id accumsan lacus, non dignissim urna. 
-	Sed purus odio, bibendum nec commodo ut, blandit at lectus. Sed ante sem, scelerisque facilisis aliquam et, finibus et augue. Etiam 
-	et ultricies diam, non fermentum felis.</p>  
+	<p>We were able to do real time processing on twitter's Firehose API using the powerfull capabilities of Storm. This platform helped us parse tweets, count hashtags, store our data into our Cassandra Database, and all while new data was constantly streaming in.</p>
 </div>
 <br></br>
 
 <div class="col-md-4" ><img src="../static/images/About Page Images/elasticsearch.png" class="img-team"></div>
-<div class="col-md-8">	
+<div class="col-md-8">
 	<h3> Elastic Search </h3>
-	<p>We implemented Elastic Search in order to be able to search for a desired hashtag in our database. On the App, the user can
-	type a hashtag they want to see into the searchbar. After they search a hashtag, all other hashtags that appear in a tweet with
-	the disired hashtag are displayed on the page</p>
+	<p>We implemented Elastic Search in order to be able to search for a desired hashtag in our database. On the App, the user can type a hashtag they want to see into the searchbar. After they search a hashtag, all other hashtags that appear in a tweet with the disired hashtag are displayed on the page</p>
 </div>
 
 </div>
 <div class="col-md-6" "meet-the-team">
 
 <div class="col-md-4" ><img src="../static/images/About Page Images/googlemaps.png" class="img-team"></div>
-<div class="col-md-8">	
+<div class="col-md-8">
 	<h3> Google Maps API </h3>
-	<p>We used the Google Maps API to bring in a map to plot our tweets. In our App, in conjunction with our Elastic Search implementation,
-	you can search a hashtag, and then with the Google Maps API, it will plot all of the tweets in our database that contain that hashtag at
-	the correct location on the map.</p>
-</div>	
+	<p>We used the Google Maps API to bring in a map to plot our tweets. In our App, in conjunction with our Elastic Search implementation, you can search a hashtag, and then with the Google Maps API, it will plot all of the tweets in our database that contain that hashtag at the correct location on the map.</p>
+</div>
 <br></br>
 
-	
+
 <div class="col-md-4" ><img src="../static/images/About Page Images/d3.png" class="img-team"></div>
 <div class="col-md-8">
 	<h3> D3 </h3>
-	<p>We used D3 to implement a bar graph to display the top trending hashtags from all tweets in our database. We used a json object to
-	store our top 200 hashtags, and then read them into a D3 bar chart. We connected our D3 bar chart to our map so that when you click on 
-	a hashtag in the bar chart, it will display those hashtags on the map.</p>
+	<p>We used D3 to implement a bar graph to display the top trending hashtags from all tweets in our database. We used a json object to store our top 200 hashtags, and then read them into a D3 bar chart. We connected our D3 bar chart to our map so that when you click on a hashtag in the bar chart, it will display those hashtags on the map.</p>
 </div>
 
 <br></br>
 <div class="col-md-4" ><img src="../static/images/About Page Images/aws.png" class="img-team"></div>
 <div class="col-md-8">
 <h3> AWS </h3>
-	<p>Ut dictum sem vel ipsum egestas, non bibendum dui fringilla. Cras ornare, est sed posuere pulvinar, enim nisl mollis nulla, non 
-	scelerisque sem arcu in mauris. Sed non mi quis ante placerat pretium nec in ligula. Proin sit amet enim sit amet nibh tristique rutrum.</p>
+	<p>Our Cassandra Database, Storm Cluster, and Django website are all hosted on an expandable Amazon Web Service Elastic Compute Cloud Instance.</p>
 </div>
 
 <br></br>
@@ -94,8 +81,7 @@
 <div class="col-md-4" ><img src="../static/images/About Page Images/maven.png" class="img-team"></div>
 <div class="col-md-8">
 <h3> Maven </h3>
-	<p>Ut dictum sem vel ipsum egestas, non bibendum dui fringilla. Cras ornare, est sed posuere pulvinar, enim nisl mollis nulla, non s
-	celerisque sem arcu in mauris. Sed non mi quis ante placerat pretium nec in ligula. Proin sit amet enim sit amet nibh tristique rutrum.</p>
+	<p>Maven controlled our java dependencies making storm deploys easy and quick. Besides its extreme lack of documentation, maven can save a lot of heartache as a project progresses.</p>
 </div>
 </div>
 
