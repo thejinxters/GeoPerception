@@ -132,6 +132,9 @@ function addHashtagsToSidebar(tweets){
 function hashtagClick(hashtag){
     $('#hashtag-search').val(hashtag);
     elasticSearch();
+    $('html, body').animate({
+        scrollTop: $("#hashtag-search").offset().top - 85
+    }, 300);
 }
 
 

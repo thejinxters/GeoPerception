@@ -1,7 +1,0 @@
-65 #Spieth
-102 #Masters
-33 #OpeningDay
-157 #NBAPlayoffs
-22 #NHLPlayoffs
-154 #GeoPerception
-69 #Twitter
