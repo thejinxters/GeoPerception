@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/d3.js"></script>
+<h1> Most Common Hashtags </h1>
+
+  <head>
+
+    <style type="text/css">
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: gray;
+}
+
+.bar text.count {
+  fill: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+var m = [20, 70, 5, 70],
+    w = 1360 - m[1] - m[3],
+    h = 5000 - m[0] - m[2];
+
+var format = d3.format(",.0f");
+
+var x = d3.scale.linear().range([0, w]),
+    y = d3.scale.ordinal().rangeRoundBands([0, h], .1);
+
+var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
+    yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+
+
+
+d3.json("{{ STATIC_URL }}sample-data.json", function(error, data) {
+
+
+  // Parse counts, and sort by count.
+  data.forEach(function(d) { d.count = +d.count; });
+  data.sort(function(a, b) { return b.count - a.count; });
+
+  // Set the scale domain.
+	x.domain([0, d3.max(data, function(d){return d.count})]);
+    y.domain(data.map(function(d) { return d.hashtag; }));
+ 
+  var svg = d3.select("body").append("svg")
+	.data(data)
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+	
+	.append("g")
+	 
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")")  
+     
+
+  var bar = svg.selectAll("g.bar")
+      .data(data)
+      .enter().append("g")
+      .attr("class", "bar")
+	
+      .attr("transform", function(d) { return "translate(0," + y(d.hashtag) + ")"; });
+      
+      
+
+
+  bar.append("rect")
+      .attr("width", function(d) { return x(d.count); })
+      .attr("height", y.rangeBand())
+      .on("click", function(d){alert(d.hashtag)});
+      
+
+  bar.append("text")
+      .attr("class", "count")
+      .attr("x", function(d) { return x(d.count); })
+      .attr("y", y.rangeBand() / 2)
+      .attr("dx", -3)
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .text(function(d) { return format(d.count); })
+      
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .call(xAxis);
+
+   
+   
+  svg.append("g")
+	.data(data)	
+	
+      .attr("class", "y axis") 
+      .call(yAxis)
+     
+
+
+	  
+});
+
+    </script>
+  </body>
+  {% endblock %}
+

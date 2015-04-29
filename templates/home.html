@@ -6,11 +6,11 @@
   <p class="lead">The goal of this project is to analyze Geodata to map trends in hashtags on Twitter. By doing this we will predict trends within a certain keyword or hashtag that we are looking at.</p>
 </div>
 
-<div class="row"> 
+<div class="row">
   <div class="map-area col-md-8">
     <div class="hashtag-search-form">
-      <form action="">
-        <input type="text" class="hashtag-search-input" placeholder="#Search For Hashtag"/>
+      <form action="" onsubmit="elasticSearch(); return false;">
+        <input type="text" id="hashtag-search" class="hashtag-search-input" placeholder="#Search For Hashtag"/>
         <button class="hashtag-search-submit">Search</button>
       </form>
     </div>
@@ -20,8 +20,6 @@
       <a class="heatmap-button">Toggle Heatmap</a>
     </div>
   </div>
-
-
 
   <div class="hashtag-sidebar col-md-4">
     <div class="top-hashtags-link">
@@ -45,7 +43,8 @@
    </div>
  </div>
 
+<script> var image = "{% static 'images/tweet-30.png' %}"; </script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/tweetmap.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/search.js"></script>
 
- <script type="text/javascript" src="{{ STATIC_URL }}js/tweetmap.js"></script>
-
- {% endblock %}
+{% endblock %}

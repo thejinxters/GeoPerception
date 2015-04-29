@@ -24,6 +24,13 @@
         src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false">
       </script>
 
+      {# Vendor JS Files: #}
+      <link href="{% static 'jquery/css/jquery-ui.min.css' %}" rel="stylesheet" media="all">
+      <script src="{% static 'jquery/js/jquery-1.11.2.min.js' %}"></script>
+      <script src="{% static 'jquery/js/jquery-ui.min.js' %}"></script>
+      <script src="{% static 'jquery/js/linkify.js' %}"></script>
+      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
 
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
@@ -49,6 +56,7 @@
             <li class="{% if request.path == '/about/'%}active{% endif%}"><a href="{% url 'about' %}">About</a></li>
             <li class="{% if request.path == '/team/'%}active{% endif%}"><a href="{% url 'team' %}">Team</a></li>
             <li class="{% if request.path == '/heatmap/'%}active{% endif%}"><a href="{% url 'heatmap' %}">Heatmap</a></li>
+            <li class="{% if request.path == '/hashtags/'%}active{% endif%}"><a href="{% url 'hashtags' %}">Most Common Hashtags</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -62,7 +70,5 @@
 
   </body>
 
-  {# Vendor JS Files: #}
-  <script src="{% static 'jquery/js/jquery-1.11.2.min.js' %}"></script>
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
 </html>

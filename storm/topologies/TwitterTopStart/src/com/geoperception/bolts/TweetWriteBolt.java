@@ -67,6 +67,7 @@ public class TweetWriteBolt extends BaseRichBolt {
             session.execute(bound);
             outputCollector.ack(input);
             System.out.println("Writing tweet to cassandra - User: " + userName);
+            System.out.println("Press ENTER to quit stream");
         }
         catch (Throwable t) {
             outputCollector.reportError(t);

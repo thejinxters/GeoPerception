@@ -59,3 +59,4 @@ coverage.xml
 #maven
 /storm/topologies/TwitterTopStart/target/
 out/
+*.out

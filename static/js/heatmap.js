@@ -504,6 +504,18 @@ var taxiData = [
   new google.maps.LatLng(37.751266, -122.403355)
 ];
 
+function offsetTaxiData() {
+  var offset_data = [];
+  var LatLng;
+  var i;
+
+  for (i = 0; i < taxiData.length; i++) {
+    LatLng = (taxiData[i]);
+    offset_data.push(new google.maps.LatLng(LatLng.lat() + 0.001, LatLng.lng() + 0.001));
+  }
+  return offset_data;
+}
+
 function initialize() {
   var mapOptions = {
     zoom: 13,
@@ -520,15 +532,22 @@ function initialize() {
     data: pointArray
   });
 
+  heatmap_b = new google.maps.visualization.HeatmapLayer({
+    data: offsetTaxiData()
+  });
+
   heatmap.setMap(map);
+  heatmap_b.setMap(map);
+  changeGradient(heatmap);
+  changeGradient(heatmap_b);
 }
 
 function toggleHeatmap() {
   heatmap.setMap(heatmap.getMap() ? null : map);
 }
 
-function changeGradient() {
-  var gradient = [
+function changeGradient(heatmap) {
+  var gradient_a = [
     'rgba(0, 255, 255, 0)',
     'rgba(0, 255, 255, 1)',
     'rgba(0, 191, 255, 1)',
@@ -543,8 +562,38 @@ function changeGradient() {
     'rgba(127, 0, 63, 1)',
     'rgba(191, 0, 31, 1)',
     'rgba(255, 0, 0, 1)'
-  ]
-  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+  ];
+  var gradient_b = [
+    'rgba(255, 0, 255, 0)',
+    'rgba(255, 0, 255, 1)',
+    'rgba(255, 0, 191, 1)',
+    'rgba(255, 0, 127, 1)',
+    'rgba(255, 0, 63, 1)',
+    'rgba(255, 0, 0, 1)',
+    'rgba(223, 0, 0, 1)',
+    'rgba(191, 0, 0, 1)',
+    'rgba(159, 0, 0, 1)',
+    'rgba(127, 0, 0, 1)',
+    'rgba(91, 63, 0, 1)',
+    'rgba(63, 127, 0, 1)',
+    'rgba(31, 191, 0, 1)',
+    'rgba(0, 255, 0, 1)'
+  ];
+
+  if (typeof changeGradient.gradient_switch == 'undefined') {
+      changeGradient.gradient_switch = 0;
+  } else if (changeGradient.gradient_switch == 0) {
+      changeGradient.gradient_switch = 1;
+  } else {
+      changeGradient.gradient_switch = 0;
+  }
+
+  if (changeGradient.gradient_switch) {
+    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient_a);
+  } else {
+    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient_b);
+  }
+
 }
 
 function changeRadius() {
