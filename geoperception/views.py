@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.http import JsonResponse
-from geoperception.models import Tweets
+from geoperception.models import Tweets, TopHashtags
 from django.db import connections
 
 
@@ -10,6 +10,7 @@ class GenericView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['tweets'] = Tweets.objects.all()
+        context['top_hashtags'] = TopHashtags.objects.all()
         return context
 
 

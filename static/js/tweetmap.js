@@ -2,6 +2,7 @@ var usa = new google.maps.LatLng(38.8833, 265.9833);
 
 var markers = [];
 var map;
+var infowindow;
 
 // Initialize Map
 function initialize() {
@@ -45,19 +46,26 @@ function addTweetToMap(tweet) {
     title: 'tweet'
   });
   google.maps.event.addListener(marker, 'click', function() {
-    new google.maps.InfoWindow({
-      content: '<div><h4>TWEET from' + tweet.username + '!</h4></div>' +
+    closeOpenTweets();
+    infowindow = new google.maps.InfoWindow({
+      content: '<div><h4>TWEET from' + tweet.username + ':</h4></div>' +
                 '<div class="tweet-content">'+
                 tweet.content +
                 '</div>'
-    }).open(map,this);
-    linkifyTweet()
+    })
+    infowindow.open(map,this);
+    linkifyTweet();
   });
   markers.push(marker);
 }
 
+function closeOpenTweets(){
+  if(infowindow){
+    infowindow.close();
+  }
+}
+
 function linkifyTweet(){
-  console.log("in linkify");
   window.setTimeout(function() {
       $('.tweet-content').linkify();;
     }, 300);
