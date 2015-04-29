@@ -1,9 +1,9 @@
-from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from geoperception.views import HomeView, AboutView, TeamView, HeatmapView, HashtagView
+from geoperception.views import HomeView, AboutView, TeamView, HeatmapView, HashtagView, Ajax
 
 urlpatterns = patterns('',
+
     # Static Views
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^about/$', AboutView.as_view(), name='about'),
@@ -11,6 +11,10 @@ urlpatterns = patterns('',
     url(r'^heatmap/$', HeatmapView.as_view(), name='heatmap'),
     url(r'^hashtags/$', HashtagView.as_view(), name='hashtags'),
 
-    #Imported Views
+    # Imported Views
     url(r'^admin/', include(admin.site.urls)),
+
+    # Ajax Calls
+    url(r'^ajax/tweets/', Ajax.get_tweet_data, name='ajax-tweets'),
+
 )

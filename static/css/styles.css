@@ -1,13 +1,44 @@
 body {
- 	padding-top: 50px;
+ 	padding-top: 100px;
+ 	text-align: center;
+ 	font-size: 12 px;
+}
+
+ul {
+	list-style-type: none;
 }
 
 h2 {
 	font-family: 'Crafty Girls', cursive;
-	font-size: 25pt; 
+	font-size: 15pt; 
 }
 
 p {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14pt;
+}
+
+.hashtag-search-form {
+	font-size: 15px;
+	padding: 10px;
+	width: 100%;
+}
+
+.hashtag-search-input {
+	padding: 10px
+}
+
+.hashtag-search-submit {
+	padding: 10px;
+}
+
+.hashtag-sidebar {
+	font-size: 20px;
+	padding: 10px;
+	text-align: left;
+
+}
+
+.hashtags {
+	text-indent: none;
 }
