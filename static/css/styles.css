@@ -3,6 +3,9 @@
 html{
 	font-family: 'News Cycle', Helvetica, sans-serif;
 }
+img{ 
+	max-width: 100%;
+}
 
 button {
   background: none;
