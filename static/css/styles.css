@@ -1,3 +1,27 @@
+html{
+	font-family: 'News Cycle', Helvetica, sans-serif;
+}
+
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-appearance: button; /* for input */
+  -webkit-user-select: none; /* for button */
+     -moz-user-select: none;
+      -ms-user-select: none;
+}
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
 .container {
 	width: 90%
 }
@@ -14,53 +38,127 @@ ul, li {
 	margin: 0px;
 }
 
-h2 {
-	font-family: 'Crafty Girls', cursive;
-	font-size: 15pt; 
-	font-style: italic;
-}
-
 h3 {
 	font-weight: bolder;
 	font-size: 20pt;
 }
 
+h5 {
+	font-size: 15pt;
+	font-style: italic;
+	width: 80%;
+	margin: 0 auto;
+	text-align:center;
+}
+
 p, ul, body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'News Cycle', Helvetica, sans-serif;
 	font-size: 14pt;
 	text-align: left;
 }
 
+nav.navbar{
+	background: #363636;
+	text-transform: uppercase;
+}
+nav.navbar-inverse .navbar-brand{
+	color:#efefef;
+}
+nav.navbar-inverse .navbar-nav>li>a{
+	color: #efefef;
+}
+nav.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a{
+	background-color: rgb(57, 107, 158);
+	background-image:none;
+}
+
+.lead{
+	max-width: 800px;
+	margin: 0px auto 30px;
+	text-align: center;
+}
+
 .hashtag-search-form {
 	font-size: 17px;
-	padding: 10px;
 	width: 100%;
+	margin-bottom: 10px;
 }
 
 .hashtag-search-input {
-	width: 69%;
+	width: 70%;
 	margin: 0px;
-	padding: 10px
+	padding-left :35px;
+	font-size: 25px;
+  line-height: 46px;
 }
-
+.hashtag-search-form form:before{
+	content: '#';
+	position: absolute;
+  left: 25px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  color: #666;
+}
 
 .hashtag-search-submit {
   width: 30%;
   margin: 0px;
-  padding: 10px;
+  padding: 12px;
   color: white;
+  float:right;
 }
 
 .hashtag-sidebar {
 	font-size: 20px;
-	padding-top: 70px;
+	padding-top: 15px;
 	text-align: left;
+}
+.related-hashtags{
+
 }
 
 .hashtags {
-	text-indent: none;
-	line-height: 35px;
+	line-height: 45px;
+	max-height: 420px;
+  overflow-y: scroll;
 }
+
+.hashtags a.item {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  padding-left:15px;
+}
+
+.hashtags a.item:hover{
+	background-color: #efffff;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(57, 107, 158, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(57, 107, 158, 0.4);
+}
+
+
 
 .map-area {
 	float: right;
@@ -69,6 +167,9 @@ p, ul, body {
 button {
 	background-color: rgb(57, 107, 158);
 }
+button:hover{
+	background-color: rgb(42, 92, 143);
+}
 
 .top-hashtags-link {
 	text-align: center;
@@ -76,12 +177,57 @@ button {
 
 .meet-the-team {
 	font-size: 15pt;
-	font-family: 'Open Sans', sans-serif;
 	padding: 40px;
 }
 
-.col-md-6 {
-
+.top-hashtags-link a{
+	font-weight:bold;
+	color: #333;
+}
+.related-hashtags-title h3{
+	background: #999;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0px;
 }
 
+.heatmap-toggle{
+	text-align:right;
+}
 
+/*JQuery UI Menu Dropdown Styles*/
+
+.ui-menu-item:before{
+	content: '#';
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{
+	color: #fff !important;
+	  border: 1px solid rgb(42, 92, 143) !important;
+  background: rgb(57, 107, 158) 50% 50% !important;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 991px){
+	.map-area {
+		float: none;
+	}
+	#map-canvas {
+	  width: 100%;
+	  height: 350px;
+	}
+}
+
+@media only screen and (max-width: 760px){
+	#map-canvas {
+	  width: 100%;
+	  height: 300px;
+	}
+}
+
+@media only screen and (max-width: 480px){
+	#map-canvas {
+	  width: 100%;
+	  height: 250px;
+	}
+}
