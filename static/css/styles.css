@@ -1,44 +1,87 @@
+.container {
+	width: 90%
+}
+
 body {
  	padding-top: 100px;
  	text-align: center;
  	font-size: 12 px;
 }
 
-ul {
+ul, li {
 	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
 }
 
 h2 {
 	font-family: 'Crafty Girls', cursive;
 	font-size: 15pt; 
+	font-style: italic;
 }
 
-p {
+h3 {
+	font-weight: bolder;
+	font-size: 20pt;
+}
+
+p, ul, body {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14pt;
+	text-align: left;
 }
 
 .hashtag-search-form {
-	font-size: 15px;
+	font-size: 17px;
 	padding: 10px;
 	width: 100%;
 }
 
 .hashtag-search-input {
+	width: 69%;
+	margin: 0px;
 	padding: 10px
 }
 
+
 .hashtag-search-submit {
-	padding: 10px;
+  width: 30%;
+  margin: 0px;
+  padding: 10px;
+  color: white;
 }
 
 .hashtag-sidebar {
 	font-size: 20px;
-	padding: 10px;
+	padding-top: 70px;
 	text-align: left;
-
 }
 
 .hashtags {
 	text-indent: none;
+	line-height: 35px;
 }
+
+.map-area {
+	float: right;
+}
+
+button {
+	background-color: rgb(57, 107, 158);
+}
+
+.top-hashtags-link {
+	text-align: center;
+}
+
+.meet-the-team {
+	font-size: 15pt;
+	font-family: 'Open Sans', sans-serif;
+	padding: 40px;
+}
+
+.col-md-6 {
+
+}
+
+
