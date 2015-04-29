@@ -63,6 +63,7 @@ nav.navbar{
 }
 nav.navbar-inverse .navbar-brand{
 	color:#efefef;
+	margin-right: 80px;
 }
 nav.navbar-inverse .navbar-nav>li>a{
 	color: #efefef;
@@ -215,6 +216,9 @@ button:hover{
 	#map-canvas {
 	  width: 100%;
 	  height: 350px;
+	}
+	nav.navbar-inverse .navbar-brand{
+		margin-right: 0px;
 	}
 }
 
