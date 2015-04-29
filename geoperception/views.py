@@ -29,6 +29,10 @@ class TeamView(GenericView):
     template_name = 'team.html'
 
 
+class HashtagView(GenericView):
+    template_name = 'hashtags.html'
+
+
 # Ajax Functions
 class Ajax:
     def get_tweet_data(request):
