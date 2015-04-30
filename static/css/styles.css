@@ -3,7 +3,7 @@
 html{
 	font-family: 'News Cycle', Helvetica, sans-serif;
 }
-img{ 
+img{
 	max-width: 100%;
 }
 
@@ -192,6 +192,10 @@ nav.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a{
 
 .map-area {
 	float: right;
+}
+
+.map-area img{
+  max-width: none;
 }
 
 .top-hashtags-link {
