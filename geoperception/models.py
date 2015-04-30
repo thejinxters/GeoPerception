@@ -14,3 +14,8 @@ class TopHashtags(Model):
     read_repair_chance = 0.05  # optional - defaults to 0.1
     hashtag = columns.Text(primary_key=True)
     count = columns.BigInt()
+
+class HashtagTweets(Model):
+    read_repair_chance = 0.05  # optional - defaults to 0.1
+    hashtag = columns.Text(primary_key=True)
+    tweetids = columns.Text()

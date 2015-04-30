@@ -34,7 +34,7 @@ function elasticSearch(){
     var match = { "hashtag": request };
     var postData = {
         "query": { "match": match },
-        "fields": ["hashtag", "tweetids"]
+        "fields": ["hashtag"]
     };
     $.ajax({
         url: hostname + "hashtag_tweets/_search",
@@ -44,24 +44,38 @@ function elasticSearch(){
         success: function(data) {
             var response = $.map(data.hits.hits, function(item) {
                 return {
-                    hashtag: item.fields.hashtag,
-                    tweets: item.fields.tweetids
+                    hashtag: item.fields.hashtag
                 }
             });
             if(response.length){
-                var tweetlist = [];
+                var hashtaglist = [];
                 $(response).each(function (){
-                   $(this.tweets[0].split(',')).each( function() {
-                        tweetlist.push(this.toString());
+                   $(this.hashtag[0].split(',')).each( function() {
+                        hashtaglist.push(this.toString());
                     });
-                    tweetlist = removeDuplicatesFromArray(tweetlist);
                 });
-                getTweetsFromCassandra(tweetlist);
+                getTweetIdsFromCassandra(hashtaglist);
             }
             else{
                 $('#tweetlist-display').html("There were no results that matched your query");
             }
         },
+    });
+}
+
+function getTweetIdsFromCassandra(hashtaglist){
+    var postData = {
+        'hashtags' : hashtaglist
+    };
+    $.ajax({
+        url: "/ajax/tweetids/",
+        type: "POST",
+        dataType: "JSON",
+        data: postData,
+        success: function(data) {
+            var tweetlist = data.response;
+            getTweetsFromCassandra(tweetlist);
+        }
     });
 }
 

@@ -15,5 +15,6 @@ urlpatterns = patterns('',
 
     # Ajax Calls
     url(r'^ajax/tweets/', Ajax.get_tweet_data, name='ajax-tweets'),
+    url(r'^ajax/tweetids/', Ajax.get_tweet_ids, name='ajax-tweetids'),
 
 )
