@@ -10,7 +10,7 @@ $(function() {
                 "fields": ["hashtag", "tweetids", "_id"]
             };
             $.ajax({
-                url: hostname + "hashtag_tweets/_search",
+                url: hostname + "hashtag_counts/_search",
                 type: "POST",
                 dataType: "JSON",
                 data: JSON.stringify(postData),
@@ -37,7 +37,7 @@ function elasticSearch(){
         "fields": ["hashtag"]
     };
     $.ajax({
-        url: hostname + "hashtag_tweets/_search",
+        url: hostname + "hashtag_counts/_search",
         type: "POST",
         dataType: "JSON",
         data: JSON.stringify(postData),
